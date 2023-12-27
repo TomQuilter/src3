@@ -11,6 +11,7 @@ from models.AbilityDifficultyVariationalInference import AbilityDifficultyVariat
  
 split_config = 'default'
 
+# Git working :):):):):):):
 #model_config = 'AbDif'
 # model_config = 'AbDifVI'
 #model_config = 'Int2'
