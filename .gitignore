@@ -1,0 +1,9 @@
+data/
+/data
+data
+.venv
+.DS_Store
+src/results
+thesis_fig
+vis/plots
+draft

@@ -1,0 +1,10 @@
+model: AbDif
+dimension: 0
+student_dimension: 30000
+question_dimension: 60
+seed: 2008
+
+bs_mean: 0
+bq_mean: 0
+bs_std: 1
+bq_std: 1

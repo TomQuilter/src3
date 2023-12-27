@@ -1,0 +1,5 @@
+model: 2D2PL
+dimension: 2
+iters: 10000
+seed: 1008
+rate: 0.00015

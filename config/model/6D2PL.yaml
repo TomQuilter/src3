@@ -1,0 +1,5 @@
+model: 6D2PL
+dimension: 6
+iters: 10000
+seed: 1008
+rate: 0.00015

@@ -1,0 +1,5 @@
+model: Interactive2
+dimension: 1
+iters: 2000
+seed: 1008
+rate: 0.00015

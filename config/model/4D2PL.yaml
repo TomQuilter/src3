@@ -1,0 +1,5 @@
+model: 4D2PL
+dimension: 4
+iters: 10000
+seed: 1008
+rate: 0.00015

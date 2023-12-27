@@ -1,0 +1,8 @@
+seed: 1000
+random_q_order: False
+random_s_order: False
+test_q_params:
+  q_range:
+  specific:
+test_split: 0.3
+val_split: 0.1

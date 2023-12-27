@@ -1,0 +1,5 @@
+model: 8D2PL
+dimension: 8
+iters: 10000
+seed: 1008
+rate: 0.00015

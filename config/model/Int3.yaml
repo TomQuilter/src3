@@ -1,0 +1,5 @@
+model: Interactive3
+dimension: 3
+iters: 10000
+seed: 1008
+rate: 0.00015

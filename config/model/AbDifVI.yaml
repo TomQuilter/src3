@@ -1,0 +1,5 @@
+model: AbilityDifficulty
+dimension: 0
+iters: 7000
+seed: 1008
+rate: 0.00025 
