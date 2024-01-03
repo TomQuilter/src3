@@ -193,7 +193,7 @@ class InteractiveVI(IterativeModel):
         #print("params['Ms']",params['Ms'])
         #print("params['Ss']",params['Ss'])
         nllsum = 0
-        MStudentsToSample = 100
+        MStudentsToSample = 25 
         for SampleNumber in range(MStudentsToSample):
             #print("hi3") 
             probit_correct, params = self.calc_probit(data_ts, params)
