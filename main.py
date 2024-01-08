@@ -14,9 +14,9 @@ split_config = 'default'
 # Git working :):):):):):): both ways!:)
 #model_config = 'AbDif'
 # model_config = 'AbDifVI'
-#model_config = 'Int2'
-model_config = 'Int2VI'
-     
+model_config = 'Int2'
+# model_config = 'Int2VI'
+      
 print("### Process Beginning Check ###") 
   
 with open(f'config/split/{split_config}.yaml') as f:

@@ -11,10 +11,10 @@ class Interactive(IterativeModel):
         self.dimension = model_params['dimension']
 
     def save_params(self,epoch, bs, bq, xs, xq):
-        torch.save(bs,  f'{epoch}_bs.pt')
-        torch.save(bq,  f'{epoch}_bq.pt')
-        torch.save(xs,  f'{epoch}_xs.pt')
-        torch.save(xq,  f'{epoch}_xq.pt')
+        torch.save(bs,  f'{epoch}_INT_bs.pt')
+        torch.save(bq,  f'{epoch}_INT_bq.pt')
+        torch.save(xs,  f'{epoch}_INT_xs.pt')
+        torch.save(xq,  f'{epoch}_INT_xq.pt')
  
     def train(self, train_ts, val_ts, test_ts, S, Q, rate, iters, init, step_size):
         acc_arr_size = math.ceil(iters/step_size)
@@ -25,12 +25,14 @@ class Interactive(IterativeModel):
             # Randomly initialise random student, question parameters
             bs = torch.randn(S, requires_grad=True, generator=self.rng, dtype=torch.float32) # default
             bq = torch.randn(Q, requires_grad=True, generator=self.rng, dtype=torch.float32) # default
-
+            xs = torch.normal(mean=0, std=np.sqrt(0.1), size=(S, self.dimension), requires_grad=True, generator=self.rng) # default
+            xq = torch.normal(mean=0, std=np.sqrt(0.1), size=(Q, self.dimension), requires_grad=True, generator=self.rng) # default
+            bs, bq, xs, xq = torch.load('1975_INT_bs.pt'), torch.load('1975_INT_bq.pt'), torch.load('1975_INT_xs.pt'), torch.load('1975_INT_xq.pt')
+         
         else:    
             bs, bq = init['bs'], init['bq']
-        
-        xs = torch.normal(mean=0, std=np.sqrt(0.1), size=(S, self.dimension), requires_grad=True, generator=self.rng) # default
-        xq = torch.normal(mean=0, std=np.sqrt(0.1), size=(Q, self.dimension), requires_grad=True, generator=self.rng) # default
+            
+
 
         # xs = torch.ones(size=(S, self.dimension)) * 1
         # xs.requires_grad = True

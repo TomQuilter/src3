@@ -1,7 +1,7 @@
 import pandas as pd
 from typing import List, Tuple
 #data/9to1_2017_GCSE_1H_and_2H_and_3H Linked Pinpoint Data_Cleaned.csv
-
+ 
 def parse_paper(paper: str) -> Tuple[pd.DataFrame, pd.DataFrame]:
     if paper == 'old':
         exam_df, meta_df = parse_csv(
@@ -12,14 +12,14 @@ def parse_paper(paper: str) -> Tuple[pd.DataFrame, pd.DataFrame]:
  
     elif paper == 'new1': 
         exam_df, meta_df = parse_csv(  
-            "data/LargeDataSet13_HigherExamsWithClassAndSchoolsAvailable.csv",   
-            data_row_start=6,
+            "data/LargeDataSet13_HigherExamsWithClassAndSchoolsAvailableSmall.csv",   
+            data_row_start=6, 
             meta_rows=5, 
             paper_columns=['Name'] + [f'q{i}' for i in range(1, 25)])
 
     elif paper == 'new2':
         exam_df, meta_df = parse_csv(
-            "data/LargeDataSet13_HigherExamsWithClassAndSchoolsAvailableSMALL.csv",
+            "data/LargeDataSet13_HigherExamsWithClassAndSchoolsAvailable.csv",
             data_row_start=6,
             meta_rows=5,
             paper_columns=['Name.1'] + [f'q{i}.1' for i in range(1, 24)])

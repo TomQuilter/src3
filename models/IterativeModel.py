@@ -12,7 +12,7 @@ class IterativeModel:
 
 
     def run(self, train_ts, test_ts, val_ts, data_df, meta_df, save=False, plot=False, init=None, step_size=5):
-        
+         
         self.meta = meta_df
         seed, rate, iters = self.model_params['seed'], self.model_params['rate'], self.model_params['iters']
         self.rng.manual_seed(seed)
