@@ -33,38 +33,42 @@ class InteractiveVI(IterativeModel):
             bs = Ms + Ss * epsilon  # reparameterization trick
             # bs = torch.randn(S, requires_grad=True, generator=self.rng, dtype=torch.float32) # default
             #p# print("bs2", bs)
-            
-            # bs = torch.load('1600_INT_bs.pt')
+            bs = torch.load('1600_INT_bs.pt')
  
             bq = torch.randn(Q, requires_grad=True, generator=self.rng, dtype=torch.float32) # default
-            # bq = torch.load('1600_INT_bq.pt')
-        else:    
+
+            xms = torch.zeros(size=(S, self.dimension), requires_grad=True)
+            xss = torch.ones(size=(S, self.dimension), requires_grad=True)
+            # Draw 1 sample for each (mean, std_dev) pair using the reparameterization trick
+            ## Need a D dimensional vector 
+            epsilon = torch.randn(S, self.dimension)  # samples from a standard normal (mean=0, std=1)   S = Number of STUDENTS
+            xs = xms + xss * epsilon  # reparameterization trick
+            print("xs",xs)
+
+            xq = torch.normal(mean=0, std=np.sqrt(0.1), size=(Q, self.dimension), requires_grad=True, generator=self.rng) # default
+            ## Pre Laod Initial Weights
+            bs, bq, xs, xq = torch.load('1600_INT_bs.pt'), torch.load('1600_INT_bq.pt'), torch.load('1600_INT_xs.pt'), torch.load('1600_INT_xq.pt')
+ 
+        else:      
             bs, bq = init['bs'], init['bq']
         
  
         ## So xs will also need VI on them! ie. initiate , grad update
  
         ## initialise Mu and sigma for each student
-        xms = torch.zeros(size=(S, self.dimension), requires_grad=True)
-        print("initial xms",xms)   
-        
-        xss = torch.ones(size=(S, self.dimension), requires_grad=True)    
-        # Draw 1 sample for each (mean, std_dev) pair using the reparameterization trick
-        ## Need a D dimensional vector 
-        epsilon = torch.randn(S, self.dimension)  # samples from a standard normal (mean=0, std=1)   S = Number of STUDENTS
-        xs = xms + xss * epsilon  # reparameterization trick
-        # xs = torch.load('1600_INT_xs.pt')
-        print("xs",xs)
+
+        #xms = torch.load('1600_INT_xs.pt')
+        #print("initial xms",xms)   
+        #    
+        #xss = torch.load('1600_INT_xs.pt')
+
         #xs = torch.randn(S, requires_grad=True, generator=self.rng, dtype=torch.float32) # default
- 
+
         # xms = 
         # xss = 
         
         #xs = torch.normal(mean=0, std=np.sqrt(0.1), size=(S, self.dimension), requires_grad=True, generator=self.rng) # default
         ## self.dimension = number of dimensions hey
-
-        xq = torch.normal(mean=0, std=np.sqrt(0.1), size=(Q, self.dimension), requires_grad=True, generator=self.rng) # default
-        # xq = torch.load('1600_INT_xq.pt')
 
         # xs = torch.ones(size=(S, self.dimension)) * 1
         # xs.requires_grad = True
@@ -147,9 +151,8 @@ class InteractiveVI(IterativeModel):
         #p# print("NumberofStudents",NumberofStudents)
         #Draw 1 sample for each (mean, std_dev) pair using the reparameterization trick
         epsilon = torch.randn(NumberofStudents)  # samples from a standard normal (mean=0, std=1)
-        # epsilon = 0
         params['bs'] = params['Ms'] + params['Ss'] * epsilon  # reparameterization trick
-        #print("bs2", bs) 
+        #print("bs2", bs)
         #p#print("params['bs']")
         #p#print(params['bs'])
  
@@ -176,7 +179,6 @@ class InteractiveVI(IterativeModel):
         ### VI the Xs ###
 
         epsilon = torch.randn(NumberofStudents, self.dimension)  # samples from a standard normal (mean=0, std=1)   S = Number of STUDENTS
-        # epsilon = 0
         params['xs'] = params['xms'] + params['xss'] * epsilon  # reparameterization trick
  
         xs_data = torch.index_select(params['xs'], 0, data_ts[1])
@@ -196,7 +198,7 @@ class InteractiveVI(IterativeModel):
         #print("params['Ms']",params['Ms'])
         #print("params['Ss']",params['Ss'])
         nllsum = 0
-        MStudentsToSample = 25
+        MStudentsToSample = 1
         for SampleNumber in range(MStudentsToSample):
             #print("hi3") 
             probit_correct, params = self.calc_probit(data_ts, params)

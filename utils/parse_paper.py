@@ -12,7 +12,7 @@ def parse_paper(paper: str) -> Tuple[pd.DataFrame, pd.DataFrame]:
  
     elif paper == 'new1': 
         exam_df, meta_df = parse_csv(  
-            "data/LargeDataSet13_HigherExamsWithClassAndSchoolsAvailableSmall.csv",   
+            "data/LargeDataSet13_HigherExamsWithClassAndSchoolsAvailable.csv",   
             data_row_start=6, 
             meta_rows=5, 
             paper_columns=['Name'] + [f'q{i}' for i in range(1, 25)])

@@ -27,8 +27,8 @@ class Interactive(IterativeModel):
             bq = torch.randn(Q, requires_grad=True, generator=self.rng, dtype=torch.float32) # default
             xs = torch.normal(mean=0, std=np.sqrt(0.1), size=(S, self.dimension), requires_grad=True, generator=self.rng) # default
             xq = torch.normal(mean=0, std=np.sqrt(0.1), size=(Q, self.dimension), requires_grad=True, generator=self.rng) # default
-            bs, bq, xs, xq = torch.load('1975_INT_bs.pt'), torch.load('1975_INT_bq.pt'), torch.load('1975_INT_xs.pt'), torch.load('1975_INT_xq.pt')
-         
+            # bs, bq, xs, xq = torch.load('1975_INT_bs.pt'), torch.load('1975_INT_bq.pt'), torch.load('1975_INT_xs.pt'), torch.load('1975_INT_xq.pt')
+          
         else:    
             bs, bq = init['bs'], init['bq']
             
@@ -52,8 +52,8 @@ class Interactive(IterativeModel):
 
                 if epoch != 0 and val_nll > prev_val:
                     last_epoch = epoch
-                    self.save_params(epoch, bs, bq, xs, xq) 
-                    break
+                    #self.save_params(epoch, bs, bq, xs, xq) 
+                    # break 
                 
                 val_nll_arr[epoch//step_size] = val_nll
                 test_nll_arr[epoch//step_size] = test_nll
@@ -74,7 +74,7 @@ class Interactive(IterativeModel):
                 xq -= rate * xq.grad
  
             # Store bs and xs values
-            if epoch == (iters-25):
+            if epoch == 1600: # (iters-25):
                 self.save_params(epoch, bs, bq, xs, xq)
  
             # Zero gradients after updating

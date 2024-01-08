@@ -10,7 +10,7 @@ class IterativeModel:
         self.rng = torch.Generator()
         self.model_params = model_params
 
-
+  
     def run(self, train_ts, test_ts, val_ts, data_df, meta_df, save=False, plot=False, init=None, step_size=5):
          
         self.meta = meta_df
